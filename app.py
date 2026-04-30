@@ -1,3 +1,6 @@
+
+# чтобы запустить app.py из командной строки:    streamlit run app.py
+
 # app.py
 import streamlit as st
 import pandas as pd
@@ -24,6 +27,7 @@ def load_resources():
             self.net = nn.Sequential(
                 nn.Linear(input_size, 12),
                 nn.ReLU(),
+                nn.Dropout(0.1),
                 nn.Linear(12, 1)
             )
         def forward(self, x):
@@ -58,7 +62,7 @@ with col1:
         'porsche', 'renault', 'saab', 'subaru', 'toyota', 'volkswagen', 'volvo'])
     
     horsepower = st.number_input("⚡ Мощность (л.с.)", min_value=50, max_value=500, value=150, step=10)
-    curbweight = st.number_input(" Вес (фунты)", min_value=1500, max_value=4500, value=1000, step=100)
+    curbweight = st.number_input(" Вес (фунты)", min_value=1500, max_value=4500, value=1500, step=100)
 
 with col2:
     fueltype = st.selectbox(" Вид топлива", ["gas", "diesel"])  
@@ -89,7 +93,7 @@ with btn_col:
             # Вывод результата
             st.markdown(f"""
                 <div style='background-color: #28a745; padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px;'>
-                    <h2 style='color: white; margin: 0;'> {price:,.0f} руб</h2>
+                    <h2 style='color: white; margin: 0;'> {price:,.0f} $</h2>
                     <p style='color: white; margin: 5px 0 0 0;'>Прогнозируемая стоимость</p>
                 </div>
             """, unsafe_allow_html=True)
