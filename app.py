@@ -7,8 +7,10 @@ import torch.nn as nn
 import numpy as np
 import json
 
-# кастомизация страницы
+# Импортируем модель из model.py                   
+from model import CarPredictor
 
+# кастомизация страницы
 st.set_page_config(
     page_title="Car Price Predictor v2",
     page_icon="🚗",
@@ -21,20 +23,6 @@ def load_resources():
     # загружаем конфиг:
     with open("model_config.json", "r", encoding="utf-8") as f:
         config = json.load(f)
-
-
-    # Архитектура модели (должна совпадать с train.py)
-    class CarPredictor(nn.Module):
-        def __init__(self, input_size, hidden_size, dropout_rate):
-            super().__init__()
-            self.net = nn.Sequential(
-                nn.Linear(input_size, hidden_size),     # уменьшили с 16 до 12. 205 строк vs 31 признак. высокий риск переобучения. 
-                nn.ReLU(),
-                nn.Dropout(dropout_rate),             # случайно отключает 10% нейронов. Стд. защита от запоминания тренировочных данных 
-                nn.Linear(hidden_size, 1)
-            )
-        def forward(self, x):
-            return self.net(x)
 
     # Загружаем веса и препроцессоры
     model = CarPredictor(

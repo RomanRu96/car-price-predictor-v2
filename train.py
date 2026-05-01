@@ -9,6 +9,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
+# Импортируем модель из model.py                   
+from model import CarPredictor
 
 # === Глобальные гиперпараметры ===
 
@@ -111,23 +113,6 @@ X_test_t = torch.FloatTensor(X_test_proc)
 y_test_t = torch.FloatTensor(y_test_scaled).reshape(-1, 1)
 
 
-
-
-# === 6. Модель ===                   
-class CarPredictor(nn.Module):
-    def __init__(self, input_size, hidden_size, dropout_rate):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(input_size, hidden_size),     # уменьшили с 16 до 12. 205 строк vs 31 признак. высокий риск переобучения. 
-            nn.ReLU(),
-            nn.Dropout(dropout_rate),             # случайно отключает 10% нейронов. Стд. защита от запоминания тренировочных данных 
-            nn.Linear(hidden_size, 1)
-        )
-    def forward(self, x):
-        return self.net(x)
-
-
-
 # input_size посчитается автоматически (31 признак)
 model = CarPredictor(
     input_size = X_train_proc.shape[1],
@@ -138,7 +123,7 @@ model = CarPredictor(
 optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 criterion = nn.MSELoss()
 
-# === 7. Обучение ===
+# === 6. Обучение ===
 print("\nОбучение модели...")
 for epoch in range(1000):  # Увеличили эпохи для lr=0.001
     preds = model(X_train_t)
@@ -152,7 +137,7 @@ for epoch in range(1000):  # Увеличили эпохи для lr=0.001
 print(f"\nФинальный Loss: {loss.item():.4f}")
 
 
-# === 8. Оценка ===
+# === 7. Оценка ===
 model.eval()
 with torch.no_grad():
     train_pred = model(X_train_t).numpy().flatten()
@@ -166,16 +151,15 @@ print(f"R² Test:  {calc_r2(test_pred, y_test_scaled):.2%}")
 
 
 
-# === 9. Сохранение артефактов (КРИТИЧЕСКИ ВАЖНО!) ===
+# === 8. Сохранение артефактов ===
 torch.save(model.state_dict(), "model.pth")           # Веса модели
 joblib.dump(preprocessor, "preprocessor.joblib")      # числовые признаки
 joblib.dump(price_scaler, "price_scaler.joblib")      # признаки price
 
 print("\nФайлы успешно сохранены: \n\nmodel.pth \npreprocessor.joblib \nprice_scaler.joblib")
 
-# === 10. Сохранение конфига модели ===
 
-
+# === 9. Сохранение конфига модели ===
 model_config = {
     "input_size": int(X_train_proc.shape[1]),  # Автоматически 31
     "hidden_size": HIDDEN_SIZE,
@@ -190,5 +174,4 @@ with open("model_config.json", "w", encoding="utf-8") as f:
     json.dump(model_config, f, indent=2, ensure_ascii=False)
 
 print("model_config.json")
-
 
