@@ -79,6 +79,61 @@ y = df[target_col]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+
+
+
+
+
+
+
+# === Сравнение: PyTorch MLP vs CatBoost ===
+from catboost import CatBoostRegressor
+from sklearn.metrics import r2_score
+
+print("\n🔹 Обучение CatBoost (работает с сырыми DataFrame)...")
+
+# CatBoost сам закодирует категории! Передаём имена колонок
+cat_features = categorical_cols
+
+cat_model = CatBoostRegressor(
+    iterations=500,
+    learning_rate=0.05,
+    depth=6,
+    verbose=False,          # Отключаем шум в консоли
+    random_state=42
+)
+# Обучаем на ИСХОДНЫХ данных (без StandardScaler и OHE!)
+cat_model.fit(X_train, y_train, cat_features=cat_features)
+
+# Оцениваем
+cat_preds = cat_model.predict(X_test)
+cat_r2 = r2_score(y_test, cat_preds)
+print(f"✅ CatBoost R² Test: {cat_r2:.4f}")
+
+# Теперь запускаем твой PyTorch пайплайн (как раньше)
+# ... (твой код preprocessor, model, optimizer, training loop) ...
+
+# После обучения PyTorch выведи его R²
+print(f"\n📊 ИТОГОВОЕ СРАВНЕНИЕ:")
+print(f"   PyTorch MLP R²: {mlp_r2:.4f}")
+print(f"   CatBoost    R²: {cat_r2:.4f}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # === 3. Препроцессинг (ColumnTranformer + Pandas) ===
 
 preprocessor = ColumnTransformer(
