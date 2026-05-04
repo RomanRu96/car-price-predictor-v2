@@ -1,9 +1,11 @@
+
+```markdown
 # 🚗 Car Price Predictor v2
 
 Машинное обучение для предсказания стоимости автомобиля. Проект проходит полный цикл: от очистки данных и обучения до деплоя веб-приложения.
 
 🔗 **[Попробовать демо](https://car-price-predictor-v2-2026.streamlit.app/)**  
-📂 **[Скачать датасет (Kaggle)](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction)**
+📂 **[Датасет (Kaggle)](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction)**
 
 ---
 
@@ -11,50 +13,61 @@
 
 Цель проекта — создать точную модель для оценки стоимости авто на основе характеристик. 
 
-**Ключевая особенность:**
-В рамках обучения реализовано **сравнение двух алгоритмов**:
-1. **PyTorch (MLP)** — нейронная сеть.
-2. **CatBoost** — градиентный бустинг.
+**Ключевая особенность:** реализовано **сравнение двух алгоритмов**:
+1. **PyTorch (MLP)** — нейронная сеть
+2. **CatBoost** — градиентный бустинг
 
-В продакшен (`app.py`) интегрирована победившая модель **CatBoost**, так как она показала более высокую точность при меньшем количестве кода.
+В продакшен (`app.py`) интегрирована победившая модель **CatBoost** (точность выше при меньшем коде).
 
-### 🏆 Результаты сравнения
+### 🏆 Результаты
 
-| Алгоритм | R² Score (Test) | Время обучения | Размер модели |
-|:---|:---:|:---:|:---:|
-| **PyTorch MLP** | 90.07% | ~15 сек | 4 КБ + артефакты |
-| **CatBoost** | **92.85%** | ~2 сек | 1 файл .cbm |
-
-> **Вывод:** CatBoost выигрывает по точности (+2.8%) и скорости инференса, а также требует меньше зависимостей для деплоя.
+| Алгоритм | R² Score (Test) | 
+|:---|:---:|
+| **PyTorch MLP** | 90.07% |
+| **CatBoost** | **92.85%** ✅ |
 
 ---
 
 ## 🛠 Технологии
 
-*   **Язык:** Python 3.9+
-*   **ML Frameworks:** CatBoost, PyTorch, Scikit-learn
-*   **Data Processing:** Pandas, NumPy
-*   **Web UI:** Streamlit
-*   **Deployment:** GitHub + Streamlit Cloud
+Python 3.9+ | CatBoost | PyTorch | Pandas | Streamlit
 
 ---
 
-##  Структура проекта
+## 📁 Структура
 
-Проект разделен на модули для удобства поддержки:
-
-*   `train.py` — **Гибридный скрипт обучения**. Загружает данные, очищает их, обучает обе модели (MLP и CatBoost), сравнивает их и сохраняет конфиг `model_config.json`.
-*   `app.py` — **Веб-интерфейс**. Загружает победившую модель и конфиг, предоставляет UI для предсказаний.
-*   `model.py` — **Архитектура модели** (используется для PyTorch версии).
-*   `model_config.json` — Метаданные модели (input_size, R², списки категорий).
+*   `train.py` — гибридный скрипт обучения (MLP + CatBoost)
+*   `app.py` — веб-интерфейс на Streamlit
+*   `model.py` — архитектура нейросети
+*   `model_config.json` — метаданные модели
 
 ---
 
-##  Как запустить локально
+## 🚀 Запуск локально
 
-1. Клонируйте репозиторий:
-   
-```bash
-   git clone https://github.com/[RomanRu96]/car-price-predictor-v2.git
-   cd car-price-predictor-v2
-   
+**1. Клонирование**  
+`git clone https://github.com/[RomanRu96]/car-price-predictor-v2.git`  
+`cd car-price-predictor-v2`
+
+**2. Установка зависимостей**  
+`pip install -r requirements.txt`
+
+**3. Запуск**  
+`streamlit run app.py`
+
+---
+
+## 🔧 Обработка данных
+
+✅ Извлечение марки из полного названия  
+✅ Исправление опечаток (vokswagen → volkswagen, maxda → mazda)  
+✅ Обработка пропусков в horsepower  
+✅ One-Hot Encoding категорий
+
+---
+
+## 🤝 Контакты
+
+Автор: Роман  
+GitHub: [github.com/[RomanRu96]](https://github.com/[RomanRu96])
+
