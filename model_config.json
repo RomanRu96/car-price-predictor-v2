@@ -1,0 +1,19 @@
+{
+  "input_size": 31,
+  "hidden_size": 12,
+  "dropout_rate": 0.1,
+  "learning_rate": 0.001,
+  "numeric_cols": [
+    "horsepower",
+    "curbweight"
+  ],
+  "categorical_cols": [
+    "brand",
+    "fueltype",
+    "carbody"
+  ],
+  "target_col": "price",
+  "mlp_r2": 0.9007418461212496,
+  "catboost_r2": 0.928528901861634,
+  "best_model": "catboost"
+}
