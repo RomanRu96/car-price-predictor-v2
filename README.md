@@ -45,14 +45,19 @@ Python 3.9+ | CatBoost | PyTorch | Pandas | Streamlit
 
 ## 🚀 Запуск локально
 
-**1. Клонирование**  
+**1. Скачай данные**
+Скачай датасет с [Kaggle](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction)
+Помести файл `car_data.csv` в корень проекта. 
+
+
+**2. Клонирование**  
 `git clone https://github.com/[RomanRu96]/car-price-predictor-v2.git`  
 `cd car-price-predictor-v2`
 
-**2. Установка зависимостей**  
+**3. Установка зависимостей**  
 `pip install -r requirements.txt`
 
-**3. Запуск**  
+**4. Запуск**  
 `streamlit run app.py`
 
 ---
