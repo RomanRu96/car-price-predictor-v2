@@ -7,7 +7,7 @@ from catboost import CatBoostRegressor  # ← Заменили torch на catboo
 # кастомизация страницы
 st.set_page_config(
     page_title="Car Price Predictor v2 (CatBoost)",
-    page_icon="",
+    page_icon="🚗",
     layout="centered"
 )
 
