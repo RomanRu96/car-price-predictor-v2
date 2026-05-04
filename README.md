@@ -69,5 +69,5 @@ Python 3.9+ | CatBoost | PyTorch | Pandas | Streamlit
 ## 🤝 Контакты
 
 Автор: Роман  
-GitHub: [github.com/RomanRu96](https://github.com/[RomanRu96])
+GitHub: [github.com/RomanRu96](https://github.com/RomanRu96)
 
