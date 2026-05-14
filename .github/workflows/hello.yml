@@ -1,1 +1,8 @@
-
+name: CI Check
+on: [push]
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Проверка связи
+        run: echo "✅ Робот работает! Код получен."
