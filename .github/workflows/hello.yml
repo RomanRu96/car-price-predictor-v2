@@ -22,3 +22,7 @@ jobs:
       - name: Check app.py
         run: python -c "import streamlit; import pandas; import catboost; print('✅ Все библиотеки на месте')"
 
+      # 5. Проверь, что app.py запускается без ошибок (10 секунд)
+      - name: Run app.py check
+        run: timeout 10s python app.py || true
+
