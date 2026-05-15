@@ -196,8 +196,7 @@ torch.save(model.state_dict(), "model.pth")           # Веса модели
 joblib.dump(preprocessor, "preprocessor.joblib")      # числовые признаки
 joblib.dump(price_scaler, "price_scaler.joblib")      # признаки price
 cat_model.save_model("catboost_model.cbm")            # ← Сохраняем модель CatBoost
-
-print("\nФайлы успешно сохранены: \n\nmodel.pth \npreprocessor.joblib \nprice_scaler.joblib \ncatboost_model.cbm")
+df.to_csv("cleaned_car_data.csv", index=False)        # очищенный датасет
 
 
 # === 9. Сохранение конфига модели ===
@@ -218,5 +217,7 @@ model_config = {
 with open("model_config.json", "w", encoding="utf-8") as f:
     json.dump(model_config, f, indent=2, ensure_ascii=False)
 
-print("✅ model_config.json сохранён")
+
+print("\n Файлы успешно сохранены:")
+print("\n\n model.pth \n preprocessor.joblib \n price_scaler.joblib \n catboost_model.cbm \n model_config.json \n cleaned_car_data.csv")
 

@@ -155,9 +155,38 @@ with btn_col:
         # 2. Рисуем график
         st.bar_chart(data)
 
+# график зависимости цены от мощности
+# слайдер фильтрации по мощности
+# выпадающее меню фильтрации по типу кузова
+# вывод количества отфильтрованных авто после фильтрации
+# группировка данных со слайдером. самая дорогая марка в датасете
+
+unique_bodies = df_app["carbody"].unique() # берем только уникальные значения из carbody
+sorted_unique_bodies = sorted(unique_bodies) # сортируем по алфавиту carbody
+
+selected_body = st.selectbox("Выбери кузов", options=sorted_unique_bodies) # выпадающее меню с уникальными carbody
+
+hp_limit = st.slider("Максимальная мощность (л.с.)", min_value=50, max_value=300, value=200) # слайдер от 50 до 300 л.с.
+
+# булева фильтрация по по условиям (мощность и тип кузова)
+df_filtered = df_app[
+    (df_app['horsepower'] <= hp_limit) & 
+    (df_app["carbody"] == selected_body)
+]
+st.metric("Найдено авто", len(df_filtered)) # выводит количество авто после фильтрации
+st.markdown("### Анализ: мощность vs цена")
+st.scatter_chart(df_filtered, x="horsepower", y="price", color="fueltype")
+st.caption("Каждая точка - одна машина")
 
 
+# группировка данных. 
+st.markdown("### Средняя цена по маркам") # заголовок
+avg_price_by_brand = df_app.groupby("brand")["price"].mean() # группировка марок по средней цене. есть еще sum, count, min, max и тп.
 
+limit = st.slider("", min_value=3, max_value=25, value=5) # слайдер от 3 до 25
+st.caption(f"{limit} самых дорогих марок в датасете") # !динамическая! подпись над гистограммой. 
+avg_price_by_brand_sorted = avg_price_by_brand.sort_values(ascending=False)[:limit] # false - сортировка по убываению
+st.bar_chart(avg_price_by_brand_sorted) # построение гистограммы
 
 
 
