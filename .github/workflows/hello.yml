@@ -1,8 +1,24 @@
 name: CI Check
 on: [push]
 jobs:
-  hello:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Проверка связи
-        run: echo "✅ Робот работает! Код получен."
+      # 1. Скачай код из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Установи Python 3.9
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      # 3. Установи зависимости из requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 4. Проверь, что app.py импортируется без ошибок
+      - name: Check app.py
+        run: python -c "import streamlit; import pandas; import catboost; print('✅ Все библиотеки на месте')"
+
