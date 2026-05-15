@@ -14,7 +14,17 @@ jobs:
         with:
           python-version: "3.9"
 
-      # 3. Установи зависимости из requirements.txt
+      # 3. Кэширование зависимостей
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # 3.1 Установи зависимости из requirements.txt
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -33,3 +43,14 @@ jobs:
       # 7. Проверь, что app.py запускается без ошибок (10 секунд)
       - name: Run app.py check
         run: timeout 10s python app.py || true
+
+
+
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
