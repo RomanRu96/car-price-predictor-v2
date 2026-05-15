@@ -33,19 +33,3 @@ jobs:
       # 7. Проверь, что app.py запускается без ошибок (10 секунд)
       - name: Run app.py check
         run: timeout 10s python app.py || true
-
-
-
-
-
-    steps:
-      # 1-4. Твои существующие шаги (checkout, python, pip install, check imports)
-      
-      - name: Install linter
-        run: pip install flake8
-        
-      - name: Run code check
-        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        
-      - name: Run app.py check
-        run: timeout 10s python app.py || true
