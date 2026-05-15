@@ -94,7 +94,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Кнопка "узнать цену" по центру
 _, btn_col, _ = st.columns([1, 3, 1])
 with btn_col:    
-    if st.button("💰 Узнать цену", use_container_width=True, type="primary"):
+    if st.button("💰 Узнать цену!!!!!!!!!!!!!!!!!!", use_container_width=True, type="primary"):
         try:
             with st.spinner("🧮 Считаем прогноз..."):
                 # 1. Собираем данные в DataFrame (CatBoost работает с сырыми данными!)
