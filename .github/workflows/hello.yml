@@ -28,7 +28,7 @@ jobs:
         
       # 6. запуск flake8 с выбранными флагами count, select и тп.
       - name: Run code check
-        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics   ))
+        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       
       # 7. Проверь, что app.py запускается без ошибок (10 секунд)
       - name: Run app.py check
