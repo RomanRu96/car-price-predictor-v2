@@ -1,3 +1,4 @@
+# проверка синхронизации git -> local
 # app.py (Адаптирован под CatBoost)
 import streamlit as st
 import pandas as pd
