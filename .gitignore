@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+
+# Редакторы (VS Code, PyCharm, Sublime)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Операционные системы
+.DS_Store
+Thumbs.db
+
+# Секреты (если будут токены)
+.env
+
+# Сырые данные (чтобы не грузить лишнее, если есть очищенная версия)
+car_data.csv
+
