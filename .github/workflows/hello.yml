@@ -24,31 +24,31 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      # 3.1 Установи зависимости из requirements.txt
+      # 4. Установи зависимости из requirements.txt
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # 3.2 Установка pytest 
+      # 5. Установка pytest 
       - name: Install test dependencies
         run: pip install pytest
 
-      # 3.3 Запуск pytest
+      # 6. Запуск pytest
       - name: Run unit tests
         run: python -m pytest
 
-      # 4. Проверь, что app.py импортируется без ошибок
+      # 7. Проверь, что app.py импортируется без ошибок
       - name: Check app.py
         run: python -c "import streamlit; import pandas; import catboost; print('✅ Все библиотеки на месте')"
 
-      # 5. Установка flake8 (линтинг(автокорректор) кода)
+      # 8. Установка flake8 (линтинг(автокорректор) кода)
       - name: Install linter
         run: pip install flake8
         
-      # 6. запуск flake8 с выбранными флагами count, select и тп.
+      # 9. запуск flake8 с выбранными флагами count, select и тп.
       - name: Run code check
         run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       
-      # 7. Проверь, что app.py запускается без ошибок (10 секунд)
+      # 10. Проверь, что app.py запускается без ошибок (10 секунд)
       - name: Run app.py check
         run: timeout 10s python app.py || true
 
