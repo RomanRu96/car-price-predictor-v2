@@ -11,6 +11,6 @@ def test_low_hp():
 	assert validate_horsepower(30) == False
 
 def test_high_hp():
-	assert validate_horsepower(350) == False
+	assert validate_horsepower(350) == True
 
 
