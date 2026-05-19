@@ -1,12 +1,3 @@
-Отлично. Твой текущий `README` уже хорошо структурирован. Я добавлю все новые разделы (тесты, линтинг, Docker, CI/CD), сохраняя твой стиль с эмодзи, таблицами и форматированием.
-
-**Полностью замени** содержимое `README.md` на этот вариант:
-
----
-
-### 📋 Скопируй и вставь в README.md
-
-```markdown
 # 🚗 Car Price Predictor v2
 
 Машинное обучение для предсказания стоимости автомобиля. Проект проходит полный цикл: от очистки данных и обучения до деплоя веб-приложения с автоматизированным CI/CD.
@@ -187,16 +178,3 @@ car-price-predictor-v2/
 **GitHub:** [github.com/RomanRu96](https://github.com/RomanRu96)  
 
 💡 *Проект создан в рамках обучения. Все права на датасет принадлежат [Kaggle](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction).*
-```
-
----
-
-### 📤 Что делать дальше?
-
-1.  **Сохрани** файл `README.md`.
-2.  Отправь изменения на GitHub:
-    ```bash
-    git add .
-    git commit -m "Update README: add CI/CD, Docker, Tests, and project structure"
-    git push
-    ```
